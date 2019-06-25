@@ -1,0 +1,45 @@
+@button_edge = rgb(206,212,218);
+
+/* Input Groups  */
+
+.append-edge{
+    border-color: @button_edge;
+    border-left: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px
+}
+
+.edge{
+    border-color: @button_edge;
+}
+
+/* Misc */
+
+.popover {
+    left: 156px !important;
+}
+
+.tweet{
+    padding: 0px 8px 0px 8px;
+    border-bottom: 1px solid rgb(206,212,218);
+    border-bottom-color: solid rgb(206,212,218);
+}
+
+.tweet-text{
+    padding: 0px 8px 0px 8px;
+    margin-bottom: 0px;
+}
+
+.tweet li:hover{
+    background-color: @button_edge;
+}
+
+.lg-custom{
+    height: 550px;
+    overflow: scroll;
+}
+
+li:nth-child(odd) { background: rgb(252,252,252)}
+
+
+

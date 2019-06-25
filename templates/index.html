@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+  <title>Fine Dining and Tweeting</title>
+  <!-- Libraries !-->
+  <script src='https://d3js.org/d3.v4.min.js'></script>
+  <script src="{{ url_for('static', filename='lib/js/jquery-3.3.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/js/bootstrap.bundle.min.js') }}"></script>
+  <link href="{{ url_for('static', filename='lib/css/bootstrap.css') }}" rel="stylesheet">
+  <!-- External CSS/JS !-->
+  <link href="{{ url_for('static', filename='css/maps2.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/map_viewer.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fetch_results.js') }}"></script>
+</head>
+<body>
+  <h2> Tweet Sentiment Viewer </h2>
+  <br/>
+  <!-- Search Form !-->
+  <form class="form-inline" action="{{ url_for('queryTopic') }}" method="post">
+    <div class="col-3" style="padding-left: 0px">
+      <input type="text" class="form-control" aria-label="..." placeholder="Enter a specific topic/trend" name="query"/>
+      <button type="submit" class="btn btn-default edge" style="border-color: rgb(206,212,218)">Search</button>
+    </div>
+  </form>
+  </br>
+  <div class="row">
+    <!-- Search Results !-->
+    {% if tweets %}
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header" id="search_header">
+          Results for - {{ term }}
+        </div>
+        <ul class="list-group list-group-flush lg-custom"  align="left">
+        {% for tweet in tweets %}
+          <li class="tweet" id="tweet_element" onclick="countryClick('{{ tweet.location }}')" data-toggle="popover"
+              value="{{ tweet.status }}" data-trigger="hover" data-content="{{ tweet.location }} - Sentiment: {{ tweet.sentiment }}">
+            {{ tweet.body }}
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          Results
+        </div>
+        <div class="lg-custom">
+          <br/>
+          <center>
+            No results to show...
+          </center>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- World View !-->
+    <div class="col-9">
+      <div class="card" style="height: 600px">
+        <div class="card-header">
+          World Viewer
+        </div>
+        <center>
+          <div id="map-holder"></div>
+          <div id="legend-holder">
+            <div id="map-legend"></div>
+          </div>
+        </center>
+      </div>
+    </div>
+  </div>
+</body>
+
+
